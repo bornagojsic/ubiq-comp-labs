@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "author": "Your Name",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp32",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-button",
+      "id": "btn1",
+      "top": 100,
+      "left": 200,
+      "attrs": {
+        "color": "red",
+        "label": "BOOT Button"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "esp32:GPIO0",
+      "$serialMonitor:RX",
+      [],
+      []
+    ],
+    [
+      "btn1:pin1",
+      "esp32:GPIO0",
+      [],
+      []
+    ],
+    [
+      "btn1:pin2",
+      "esp32:GND",
+      [],
+      []
+    ]
+  ]
+}
