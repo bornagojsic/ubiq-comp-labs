@@ -59,6 +59,12 @@ class CButton {
 }
 ```
 
+`CButton` State Diagram:
+
+add image at ./img/CButtonState.png
+
+![`CButton` State Diagram](./img/CButtonState.png "`CButton` State Diagram")
+
 Example usage:
 
 ```cpp
