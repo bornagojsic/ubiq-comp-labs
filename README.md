@@ -65,8 +65,8 @@ Example usage:
 CButton button(BUTTON_GPIO_PIN);
 
 button.attachSinglePress(onButtonClicked);
-button.attachLongPress(onButtonLongPressed);
 button.attachDoublePress(onButtonDoubleClicked);
+button.attachLongPress(onButtonLongPressed);
 
 void loop() {
     button.tick();

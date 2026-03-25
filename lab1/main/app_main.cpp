@@ -16,14 +16,14 @@ void onButtonClicked()
     ESP_LOGI(TAG, "Button clicked!");
 }
 
-void onButtonLongPressed()
-{
-    ESP_LOGI(TAG, "Button long pressed!");
-}
-
 void onButtonDoubleClicked()
 {
     ESP_LOGI(TAG, "Button double clicked!");
+}
+
+void onButtonLongPressed()
+{
+    ESP_LOGI(TAG, "Button long pressed!");
 }
 
 void button_task(void *pvParameters)
@@ -32,8 +32,8 @@ void button_task(void *pvParameters)
 
     CButton button(BUTTON_GPIO_PORT);
     button.attachSingleClick(onButtonClicked);
-    button.attachLongPress(onButtonLongPressed);
     button.attachDoubleClick(onButtonDoubleClicked);
+    button.attachLongPress(onButtonLongPressed);
 
     ESP_LOGI(TAG, "Button initialized. Waiting for clicks...");
 
