@@ -31,21 +31,22 @@ private:
         DOUBLE_CLICK
     };
 
-    State state = IDLE;
+    State m_state = IDLE;
 
     ButtonEventHandler singleClick = nullptr;
     ButtonEventHandler doubleClick = nullptr;
     ButtonEventHandler longPress = nullptr;
 
     gpio_num_t m_pinNumber;
-    int m_lastState;
-    int64_t lastDebounceTime;
+    int m_lastPinLevel = 0;
+    int64_t m_lastDebounceTime;
 
-    int64_t stateTimestamp;
-    int64_t lastDownTime;
-    int64_t lastUpTime;
+    int64_t m_stateTimestamp;
+    int64_t m_lastDownTime;
+    int64_t m_lastUpTime;
 
-    int readAction(int current_state, int64_t now);
+    int readAction(int currentPinLevel, int64_t now);
+    void setState(State newState);
 };
 
 #endif
