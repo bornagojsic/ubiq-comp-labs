@@ -1,5 +1,5 @@
 idf_component_register(
-    SRCS "app_main.c"          # ✅ Must match your filename exactly
+    SRCS "button.c" "ntc.c" "dht22.c" "app_main.c"          # ✅ Must match your filename exactly
     INCLUDE_DIRS "."
     REQUIRES driver esp_adc esp_driver_gpio
     PRIV_REQUIRES freertos
