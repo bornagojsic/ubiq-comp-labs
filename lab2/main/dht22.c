@@ -4,10 +4,9 @@
 #include "freertos/task.h"
 #include <stdio.h>
 
-// --- Timing ---
-#define START_DELAY_MS 20
-#define RESPONSE_TIMEOUT 250
-#define BIT_TIMEOUT 300
+#define START_DELAY pdMS_TO_TICKS(20)
+#define RESPONSE_TIMEOUT pdMS_TO_TICKS(250)
+#define BIT_TIMEOUT pdMS_TO_TICKS(300)
 #define BIT_THRESHOLD 7
 
 static int wait_for_level(gpio_num_t pin, int level, int timeout)
@@ -38,16 +37,14 @@ int dht22_read(dht22_t *dev, float *temperature, float *humidity)
 {
     uint8_t data[5] = {0};
 
-    // Start signal
     gpio_set_direction(dev->pin, GPIO_MODE_OUTPUT);
     gpio_set_level(dev->pin, 0);
-    vTaskDelay(pdMS_TO_TICKS(START_DELAY_MS));
+    vTaskDelay(START_DELAY);
 
     gpio_set_level(dev->pin, 1);
     esp_rom_delay_us(40);
     gpio_set_direction(dev->pin, GPIO_MODE_INPUT);
 
-    // Response
     if (wait_for_level(dev->pin, 1, RESPONSE_TIMEOUT) < 0 ||
         wait_for_level(dev->pin, 0, RESPONSE_TIMEOUT) < 0 ||
         wait_for_level(dev->pin, 1, RESPONSE_TIMEOUT) < 0)
@@ -55,7 +52,6 @@ int dht22_read(dht22_t *dev, float *temperature, float *humidity)
         return -1;
     }
 
-    // Read bits
     for (int i = 0; i < 40; i++)
     {
         if (wait_for_level(dev->pin, 0, BIT_TIMEOUT) < 0)
@@ -70,7 +66,6 @@ int dht22_read(dht22_t *dev, float *temperature, float *humidity)
             data[i / 8] |= 1;
     }
 
-    // Checksum
     uint8_t sum = data[0] + data[1] + data[2] + data[3];
     if (sum != data[4])
         return -1;
@@ -78,15 +73,13 @@ int dht22_read(dht22_t *dev, float *temperature, float *humidity)
     *humidity = ((data[0] << 8) | data[1]) / 10.0f;
     uint16_t raw_temp = (data[2] << 8) | data[3];
 
-    if (raw_temp & 0x8000) // negative temperature
+    if (raw_temp & 0x8000)
     {
-        raw_temp &= 0x7FFF; // remove sign bit
+        raw_temp &= 0x7FFF;
         *temperature = -((float)raw_temp / 10.0f);
     }
     else
-    {
         *temperature = (float)raw_temp / 10.0f;
-    }
 
     return 0;
 }
