@@ -4,6 +4,8 @@
 #include "freertos/task.h"
 #include <stdio.h>
 
+// https://cdn.sparkfun.com/assets/f/7/d/9/c/DHT22.pdf
+
 #define START_DELAY pdMS_TO_TICKS(20)
 #define RESPONSE_TIMEOUT pdMS_TO_TICKS(250)
 #define BIT_TIMEOUT pdMS_TO_TICKS(300)
