@@ -44,9 +44,9 @@
 
 */
 
-#define A 1.1213382483e-03f
-#define B 2.3606953076e-04f
-#define C 7.4780612920e-08f
+#define A 1.1185041013e-03f
+#define B 2.3649567979e-04f
+#define C 7.3461320173e-08f
 
 void ntc_init(ntc_t *dev, adc_channel_t channel)
 {
