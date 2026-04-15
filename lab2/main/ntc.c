@@ -6,7 +6,6 @@
 #define ADC_MAX 4095.0f
 #define VREF 3.3f
 
-#define R_FIXED 10000.0f
 #define R0 10000.0f
 
 /* Python code to calculate Steinhart-Hart coefficients from datasheet values:
