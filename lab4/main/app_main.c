@@ -17,11 +17,9 @@
 #include "services/gap/ble_svc_gap.h"
 #include "services/gatt/ble_svc_gatt.h"
 
-// ================= MISIJA: Prilagodi svojim podacima =================
 #define JMBAG "0036551896"
 #define JMBAG_ZADNJE4 0x1896
 #define DEVICE_NAME "BornaGojsic"
-// ====================================================================
 
 #define SERVICE_UUID JMBAG_ZADNJE4
 #define CHAR1_UUID (JMBAG_ZADNJE4 + 1)
